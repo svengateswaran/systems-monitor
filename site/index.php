@@ -17,7 +17,7 @@ $(document).ready(function(){
 <body>
 <div id="systems-container">
 <div id="header">
-Simple Remote Systems Monitor
+Systems Monitor
 </div>
 <div id="systems-data">
 </div>

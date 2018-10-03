@@ -11,7 +11,7 @@ BUILD=./bin
 SRC=./src
 INCLUDES=./include
 
-SERVER_IP="192.168.113.210"
+CLIENT_IP="192.168.113.223"
 
 all: bin server client
 
@@ -25,7 +25,7 @@ client:
 	$(CXX) $(SRC)/client.c -I$(INCLUDES) -o $(BUILD)/client
 
 run-server:
-	$(BUILD)/server
+	$(BUILD)/server $(CLIENT_IP)
 
 run-client:
-	$(BUILD)/client $(SERVER_IP)
+	$(BUILD)/client

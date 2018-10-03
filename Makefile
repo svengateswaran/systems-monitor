@@ -19,10 +19,10 @@ bin:
 	mkdir -p $(BUILD)
 
 server:
-	$(CXX) $(SRC)/server.c -I$(INCLUDES) -o $(BUILD)/server
+	$(CXX) $(SRC)/server/*.c -I$(INCLUDES) -o $(BUILD)/server
 
 client:
-	$(CXX) $(SRC)/client.c -I$(INCLUDES) -o $(BUILD)/client
+	$(CXX) $(SRC)/client/*.c -I$(INCLUDES) -o $(BUILD)/client
 
 run-server:
 	$(BUILD)/server $(CLIENT_IP)

@@ -10,7 +10,10 @@ CXX=gcc
 BUILD=./bin
 SRC=./src
 
-all: server client
+all: bin server client
+
+bin:
+	mkdir -p $(BUILD)
 
 server:
 	$(CXX) $(SRC)/server.c -o $(BUILD)/server

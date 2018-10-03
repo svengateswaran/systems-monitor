@@ -21,9 +21,8 @@ int main() {
   struct sockaddr_in address; 
   int opt = 1; 
   int addrlen = sizeof(address); 
-  char buffer[1024] = {0}; 
-  char *hello = "Hello from client"; 
      
+  attach:
   /* Creating socket file descriptor */
   if ((client_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) 
   { 
@@ -31,6 +30,7 @@ int main() {
       exit(EXIT_FAILURE); 
   }
 
+  DEBUG_INFO("socket created\n");
   /* Forcefully attaching socket to the port */
   if (setsockopt(client_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
                                                 &opt, sizeof(opt)))
@@ -42,6 +42,7 @@ int main() {
   address.sin_addr.s_addr = INADDR_ANY;
   address.sin_port = htons( PORT );
 
+  DEBUG_INFO("setsocketopt successfull\n");
   /* Forcefully attaching socket to the port */
   if (bind(client_fd, (struct sockaddr *)&address,
                                sizeof(address))<0)
@@ -49,25 +50,31 @@ int main() {
       perror("bind failed");
       exit(EXIT_FAILURE);
   }
-  if (listen(client_fd, 3) < 0)
+  DEBUG_INFO("bind successfull\n");
+  if (listen(client_fd, 5) < 0)
   {
       perror("listen");
       exit(EXIT_FAILURE);
   }
+  DEBUG_INFO("listen successfull\n");
   if ((new_socket = accept(client_fd, (struct sockaddr *)&address,
                      (socklen_t*)&addrlen))<0)
   {
       perror("accept");
       exit(EXIT_FAILURE);
   }
+  DEBUG_INFO("connected to server\n");
   while(1) {
     sys_data *data = (sys_data*) malloc(sizeof(sys_data));
     data->cpu_load = GetCPULoad();
-    send(new_socket , data , sizeof(sys_data), 0 );
+    if(send(new_socket , data , sizeof(sys_data), MSG_NOSIGNAL) < 0) {
+      close(new_socket);
+      close(client_fd);
+      DEBUG_INFO("re-connecting to server ...\n");
+      goto attach;
+    }
 
-#if DEBUG
-    printf("CPU Load : %.2f%%\n", data->cpu_load);
-#endif /* DEBUG */
+    DEBUG_INFO("CPU Load : %.2f%%\n", data->cpu_load);
 
     free(data);
   }

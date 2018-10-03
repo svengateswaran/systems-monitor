@@ -28,8 +28,11 @@ int main(int argc, char *argv[]) {
   struct sockaddr_in client_addr; 
   char *hello = "Hello from server"; 
   char buffer[1024] = {0}; 
-  char client_ip[16];
+  char data_dir[1024];
+  sprintf(data_dir, "site/data");
+  mkdir(data_dir, 0700);
 
+  char client_ip[16];
   strcpy(client_ip, argv[1]);
 
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
@@ -56,10 +59,7 @@ int main(int argc, char *argv[]) {
       return -1; 
   } 
 
-  char data_dir[1024];
-  sprintf(data_dir, "data");
-  mkdir(data_dir, 0700);
-  sprintf(data_dir, "data/%s", client_ip);
+  sprintf(data_dir, "%s/%s", data_dir, client_ip);
   mkdir(data_dir, 0700);
  
   char data_file[1024];

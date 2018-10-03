@@ -1,29 +1,29 @@
-### systems-monitor - Simple Remote Systems Monitoring Tool
+# systems-monitor - Simple Remote Systems Monitoring Tool
 
 ## Supported OS:
-*Linux (Tested on Ubuntu)
+* Linux (Tested on Ubuntu)
 
 ## Usage:
 
-# Build the source:
+### Build the source:
 ```
 make
 ```
 
-# Start daemon on server:
+### Start daemon on server:
 ```
 make run-server &
 ```
 
-# Start daemon on client:
+### Start daemon on client:
 ```
 make run-client &
 ```
 
-# Add clients
+### Add clients
 Add clients(ipv4 address) to config/clients.txt
 
-# Setting Up the Dashboard on server:
+### Setting Up the Dashboard on server:
 1. Install Apache server
    ```
    sudo apt install apache2

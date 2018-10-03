@@ -53,3 +53,10 @@ dkms.conf
 
 # Binary Folders
 bin/
+
+# vim temporary files
+*.swp
+*.swo
+
+# Data folder
+data/

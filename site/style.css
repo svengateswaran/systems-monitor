@@ -1,0 +1,55 @@
+@font-face {
+  font-family: EncodeSans;
+  src: url("./font/encode-sans/EncodeSans-Regular.ttf");
+}
+body {
+  font-family: EncodeSans;
+  margin:0px;
+}
+
+#systems-container {
+  width:100%;
+  text-align:center;
+}
+
+.sys-block {
+  width:400px;
+  border:solid #ccc 1px;
+  display :inline-block;
+  margin:20px;
+  box-shadow:0px 0px 8px #888888;
+  border-radius:10px;
+}
+.sys-header {
+  padding:10px;
+  text-align:center;
+  background:#63B76C;
+  font-weight: bold;
+  border-radius:10px 10px 0px 0px;
+  color :#fff;
+}
+.data-table {
+  width:100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  width:50%;
+}
+#header {
+  background:#5DADEC;
+  text-align:center;
+  padding:12px;
+  color:#fff;
+  font-size:20px;
+}
+.files-details {
+  font-size:15px;
+}
+
+.progress-bar {
+  background:#f00;
+}

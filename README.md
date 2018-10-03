@@ -1,4 +1,4 @@
-# systems-monitor - Simple Remote Systems Monitoring Tool
+# Simple Remote Systems Monitoring Tool
 
 ## Supported OS:
 * Linux (Tested on Ubuntu)
@@ -33,4 +33,7 @@ Add clients(ipv4 address) to config/clients.txt
    sudo ln -s /path/to/site/directory /var/www/html/systems-monitor
    ```
 3. Launch the Dashboard - http://server_ip_address/systems-monitor
+
+### Supported Features
+* Realtime CPU Load %
 

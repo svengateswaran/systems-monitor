@@ -19,6 +19,8 @@
 #define PROC_LINE_LENGTH 4096
 #endif
 
+#define DATA_DIR "site/data"
+
 typedef struct {
   float cpu_load;
 } sys_data;

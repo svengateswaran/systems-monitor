@@ -19,5 +19,8 @@
 #define PROC_LINE_LENGTH 4096
 #endif
 
+typedef struct {
+  float cpu_load;
+} sys_data;
 
 #endif /* __DEFINITIONS_H__ */

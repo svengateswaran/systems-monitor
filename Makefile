@@ -9,6 +9,9 @@
 CXX=gcc
 BUILD=./bin
 SRC=./src
+INCLUDES=./include
+
+SERVER_IP="192.168.113.210"
 
 all: bin server client
 
@@ -16,13 +19,13 @@ bin:
 	mkdir -p $(BUILD)
 
 server:
-	$(CXX) $(SRC)/server.c -o $(BUILD)/server
+	$(CXX) $(SRC)/server.c -I$(INCLUDES) -o $(BUILD)/server
 
 client:
-	$(CXX) $(SRC)/client.c -o $(BUILD)/client
+	$(CXX) $(SRC)/client.c -I$(INCLUDES) -o $(BUILD)/client
 
 run-server:
 	$(BUILD)/server
 
 run-client:
-	$(BUILD)/client
+	$(BUILD)/client $(SERVER_IP)

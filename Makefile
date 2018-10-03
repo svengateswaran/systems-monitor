@@ -29,3 +29,6 @@ run-server:
 
 run-client:
 	$(BUILD)/client
+
+clean:
+	rm -rf bin/*

@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
   char buffer[1024] = {0}; 
   char data_dir[1024];
   sprintf(data_dir, "site/data");
-  mkdir(data_dir, 0700);
+  mkdir(data_dir, 0777);
 
   char client_ip[16];
   strcpy(client_ip, argv[1]);
@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
   } 
 
   sprintf(data_dir, "%s/%s", data_dir, client_ip);
-  mkdir(data_dir, 0700);
+  mkdir(data_dir, 0777);
  
   char data_file[1024];
   sprintf(data_file, "%s/cpu_load", data_dir);

@@ -18,6 +18,46 @@
 #include <pthread.h>
 #include <assert.h>
 
+void write_data_i(char *dir, char *filename, int value, int prefix) {
+    char full_file_path[FILE_PATH_LEN];
+    sprintf(full_file_path, "%s/%s", dir, filename);
+    if(prefix >= 0) sprintf(full_file_path, "%s_%d", full_file_path, prefix);
+    FILE *fp = fopen(full_file_path, "w");
+    fprintf(fp, "%d", value);
+    fclose(fp);
+}
+void write_data_f(char *dir, char *filename, float value, int prefix) {
+    char full_file_path[FILE_PATH_LEN];
+    sprintf(full_file_path, "%s/%s", dir, filename);
+    if(prefix >= 0) sprintf(full_file_path, "%s_%d", full_file_path, prefix);
+    FILE *fp = fopen(full_file_path, "w");
+    fprintf(fp, "%.2f", value);
+    fclose(fp);
+}
+void write_data_ui(char *dir, char *filename, unsigned int value, int prefix) {
+    char full_file_path[FILE_PATH_LEN];
+    sprintf(full_file_path, "%s/%s", dir, filename);
+    if(prefix >= 0) sprintf(full_file_path, "%s_%d", full_file_path, prefix);
+    FILE *fp = fopen(full_file_path, "w");
+    fprintf(fp, "%u", value);
+    fclose(fp);
+}
+void write_data_s(char *dir, char *filename, char* value, int prefix) {
+    char full_file_path[FILE_PATH_LEN];
+    sprintf(full_file_path, "%s/%s", dir, filename);
+    if(prefix >= 0) sprintf(full_file_path, "%s_%d", full_file_path, prefix);
+    FILE *fp = fopen(full_file_path, "w");
+    fprintf(fp, "%s", value);
+    fclose(fp);
+}
+void write_data_ull(char *dir, char *filename, unsigned long long value, int prefix) {
+    char full_file_path[FILE_PATH_LEN];
+    sprintf(full_file_path, "%s/%s", dir, filename);
+    if(prefix >= 0) sprintf(full_file_path, "%s_%d", full_file_path, prefix);
+    FILE *fp = fopen(full_file_path, "w");
+    fprintf(fp, "%llu", value);
+    fclose(fp);
+}
 
 void* get_data_from_client(void *ip) {
 
@@ -47,6 +87,7 @@ void* get_data_from_client(void *ip) {
   } 
  
   while (connect(sock, (struct sockaddr *)&client_addr, sizeof(client_addr)) < 0) {
+    sleep(1);
     DEBUG_INFO("%s : connecting ...\n", client_ip);
   } 
 
@@ -54,9 +95,8 @@ void* get_data_from_client(void *ip) {
   sprintf(data_dir, "%s/%s", DATA_DIR, client_ip);
   mkdir(data_dir, 0777);
  
-  char data_file[1024];
-  sprintf(data_file, "%s/cpu_load", data_dir);
-  
+  int gpu_index;
+
   while(1) {
     sys_data *data = (sys_data*) malloc(sizeof(sys_data));
     int valread = read(sock , data, sizeof(sys_data));
@@ -66,9 +106,18 @@ void* get_data_from_client(void *ip) {
        free(data);
        goto socket;
     }
-    FILE *data_fp = fopen(data_file, "w");
-    fprintf(data_fp, "%.2f", data->cpu_load);
-    fclose(data_fp);
+    write_data_f(data_dir, "cpu_util", data->cpu_util, -1);
+    write_data_ui(data_dir, "gpu_count", data->gpu_count, -1);
+    for (gpu_index = 0; gpu_index < data->gpu_count; gpu_index) {
+      char filename_index[FILENAME_LEN];
+      write_data_s  (data_dir, "gpu_name",        data->gpu_name[gpu_index],        gpu_index);
+      write_data_ui (data_dir, "gpu_cores_util",  data->gpu_cores_util[gpu_index],  gpu_index);
+      write_data_ui (data_dir, "gpu_mem_util",    data->gpu_mem_util[gpu_index],    gpu_index);
+      write_data_ull(data_dir, "gpu_mem_total",   data->gpu_mem_total[gpu_index],   gpu_index);
+      write_data_ull(data_dir, "gpu_mem_used",    data->gpu_mem_used[gpu_index],    gpu_index);
+      write_data_ui (data_dir, "gpu_temperature", data->gpu_temperature[gpu_index], gpu_index);
+    }
+
     free(data);
   }
 }
@@ -104,7 +153,7 @@ int main() {
     return -1;
   }
   int num_clients = read_words(CLIENTS_LIST);
-  char *clients_list = malloc(num_clients * CLIENT_LEN);
+  char *clients_list = (char*) malloc(num_clients * CLIENT_LEN);
 
   FILE *client_fp = fopen(CLIENTS_LIST, "r");
   int client_i = 0;

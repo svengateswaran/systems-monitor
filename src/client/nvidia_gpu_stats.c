@@ -29,7 +29,7 @@ unsigned long long getMemoryInfo(nvmlDevice_t dev, int which_one, void *dl)
     bad = (*nvmlDeviceGetMemoryInfoPtr)(dev, &meminfo);
 
     if (NVML_SUCCESS != bad) {
-        printf("something went wrong with NVML\n");
+        DEBUG_INFO("something went wrong with NVML\n");
     }
 
     switch (which_one) {
@@ -58,7 +58,7 @@ unsigned long long getTemperature(nvmlDevice_t dev, void *dl)
     bad = (*nvmlDeviceGetTemperaturePtr)(dev, NVML_TEMPERATURE_GPU, &ret);
 
     if (NVML_SUCCESS != bad) {
-        printf("something went wrong with NVML\n");
+       DEBUG_INFO("something went wrong with NVML\n");
     }
     return (unsigned long long)ret;
 }
@@ -79,7 +79,7 @@ unsigned long long getUtilization(nvmlDevice_t dev, int which_one, void *dl)
     bad = (*nvmlDeviceGetUtilizationRatesPtr)(dev, &util);
 
     if (NVML_SUCCESS != bad) {
-        printf("something went wrong with NVML ... \n");
+        DEBUG_INFO("something went wrong with NVML ... \n");
     }
 
     switch (which_one) {
@@ -100,7 +100,7 @@ unsigned int get_gpu_count() {
     result = nvmlDeviceGetCount(&device_count);
     if (NVML_SUCCESS != result)
     { 
-        printf("Failed to query device count: %s\n", nvmlErrorString(result));
+        DEBUG_INFO("Failed to query device count: %s\n", nvmlErrorString(result));
         return -1;
     }
     return device_count;
@@ -114,7 +114,7 @@ void* init_gpu_stat() {
     result = nvmlInit();
     if (NVML_SUCCESS != result)
     { 
-        printf("Failed to initialize NVML: %s\n", nvmlErrorString(result));
+        DEBUG_INFO("Failed to initialize NVML: %s\n", nvmlErrorString(result));
         return NULL;
     }
 
@@ -145,7 +145,7 @@ int get_gpu_stat(int index, void *dl, char *device_name, unsigned int *gpu_util,
    DEBUG_INFO("device handle success\n");
    if (NVML_SUCCESS != result)
    {
-       printf("Failed to get handle for device %i: %s\n", index, nvmlErrorString(result));
+       DEBUG_INFO("Failed to get handle for device %i: %s\n", index, nvmlErrorString(result));
        return -1;
    }
 
@@ -153,7 +153,7 @@ int get_gpu_stat(int index, void *dl, char *device_name, unsigned int *gpu_util,
    DEBUG_INFO("device name success\n");
    if (NVML_SUCCESS != result)
    {
-       printf("Failed to get name of device %i: %s\n", index, nvmlErrorString(result));
+       DEBUG_INFO("Failed to get name of device %i: %s\n", index, nvmlErrorString(result));
        return -1;
    }
  

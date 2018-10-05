@@ -11,7 +11,7 @@ function get_data() {
    }});
 }
 $(document).ready(function(){
-   setInterval(get_data, 10)
+   setInterval(get_data, 200);
 });
 </script>
 </head>

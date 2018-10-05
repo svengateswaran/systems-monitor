@@ -105,22 +105,25 @@ void* get_data_from_client(void *ip) {
   while(1) {
     sys_data *data = (sys_data*) malloc(sizeof(sys_data));
     int valread = read(sock , data, sizeof(sys_data));
-    if (valread < 1) {
+    if (valread != sizeof(sys_data)) {
        DEBUG_INFO("%s : read error! trying to reconnect ...\n", client_ip);
        close(sock);
        free(data);
        goto socket;
     }
-
+    DEBUG_INFO("-----%s--------\n", client_ip);
     write_data_f(data_dir, "cpu_util", data->cpu_util, -1);
     write_data_ui(data_dir, "gpu_count", data->gpu_count, -1);
-    for (gpu_index = 0; gpu_index < data->gpu_count; gpu_index++) {
-      write_data_s  (data_dir, "gpu_name",        data->gpu_name[gpu_index],        gpu_index);
-      write_data_ui (data_dir, "gpu_cores_util",  data->gpu_cores_util[gpu_index],  gpu_index);
-      write_data_ui (data_dir, "gpu_mem_util",    data->gpu_mem_util[gpu_index],    gpu_index);
-      write_data_ull(data_dir, "gpu_mem_total",   data->gpu_mem_total[gpu_index],   gpu_index);
-      write_data_ull(data_dir, "gpu_mem_used",    data->gpu_mem_used[gpu_index],    gpu_index);
-      write_data_ui (data_dir, "gpu_temperature", data->gpu_temperature[gpu_index], gpu_index);
+    for (gpu_index = 0; data->gpu_count > 0 &&
+                        data->gpu_count <= MAX_NUM_GPU &&
+                        gpu_index < data->gpu_count; gpu_index++) {
+      write_data_s (data_dir, "gpu_name",        data->gpu_name[gpu_index],              gpu_index);
+      write_data_ui(data_dir, "gpu_cores_util",  data->gpu_cores_util[gpu_index],        gpu_index);
+      write_data_ui(data_dir, "gpu_mem_util",    data->gpu_mem_util[gpu_index],          gpu_index);
+      write_data_f (data_dir, "gpu_mem_total",   GET_GB(data->gpu_mem_total[gpu_index]), gpu_index);
+      write_data_f (data_dir, "gpu_mem_used",    GET_GB(data->gpu_mem_used[gpu_index]),  gpu_index);
+      write_data_ui(data_dir, "gpu_temperature", data->gpu_temperature[gpu_index],       gpu_index);
+    DEBUG_INFO("-----%s-------x\n", client_ip);
     }
     free(data);
   }

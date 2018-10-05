@@ -1,7 +1,7 @@
 #ifndef __DEFINITIONS_H__
 #define __DEFINITIONS_H__
 
-#define DEBUG 1
+#define DEBUG 0
 
 #define PORT 7000
 
@@ -26,6 +26,7 @@
 #define CLIENT_LEN     32
 #define FILE_PATH_LEN  4096
 #define FILENAME_LEN   1024
+#define GET_GB(x)      (x/(1024*1024*1024.0))
 
 #if DEBUG
 #define DEBUG_INFO(...) {printf(__VA_ARGS__); fflush(stdout);}
@@ -33,7 +34,7 @@
 #define DEBUG_INFO(...) ;
 #endif
 
-#define MAX_NUM_GPU 16
+#define MAX_NUM_GPU 2
 #define GPU_NAME_LEN 512
 
 typedef struct {

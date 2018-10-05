@@ -71,22 +71,25 @@ int main() {
   while(1) {
     sys_data *data = (sys_data*) malloc(sizeof(sys_data));
     data->cpu_util = GetCPULoad();
-    data->gpu_count = get_gpu_count();
-
-    for (gpu_index = 0; gpu_index < data->gpu_count; gpu_index++) {
-      if(get_gpu_stat(gpu_index, nvml_dl,
-                      data->gpu_name[gpu_index],
-                      &data->gpu_cores_util[gpu_index],
-                      &data->gpu_mem_util[gpu_index],
-                      &data->gpu_temperature[gpu_index],
-                      &data->gpu_mem_total[gpu_index],
-                      &data->gpu_mem_used[gpu_index]) < 0) {
-         printf("NVML Error!\n");
-         return -1;
-      }
-    }                   
-
-    if(send(new_socket , data , sizeof(sys_data), MSG_NOSIGNAL) < 0) {
+    if(nvml_dl) {
+      data->gpu_count = get_gpu_count();
+ 
+      for (gpu_index = 0; gpu_index < data->gpu_count; gpu_index++) {
+        if(get_gpu_stat(gpu_index, nvml_dl,
+                        data->gpu_name[gpu_index],
+                        &data->gpu_cores_util[gpu_index],
+                        &data->gpu_mem_util[gpu_index],
+                        &data->gpu_temperature[gpu_index],
+                        &data->gpu_mem_total[gpu_index],
+                        &data->gpu_mem_used[gpu_index]) < 0) {
+           DEBUG_INFO("NVML Error!\n");
+           data->gpu_count = 911; /* Emergency ;) */
+        }
+      }                   
+    } else {
+      data->gpu_count = 911; /* Emergency */
+    }
+    if(send(new_socket , data , sizeof(sys_data), MSG_NOSIGNAL) != sizeof(sys_data)) {
       close(new_socket);
       close(client_fd);
       sleep(1);

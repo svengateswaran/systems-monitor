@@ -24,6 +24,7 @@ void write_data_i(char *dir, char *filename, int value, int prefix) {
     if(prefix >= 0) sprintf(full_file_path, "%s_%d", full_file_path, prefix);
     FILE *fp = fopen(full_file_path, "w");
     fprintf(fp, "%d", value);
+    DEBUG_INFO("%s : %d\n", filename, value);
     fclose(fp);
 }
 void write_data_f(char *dir, char *filename, float value, int prefix) {
@@ -32,6 +33,7 @@ void write_data_f(char *dir, char *filename, float value, int prefix) {
     if(prefix >= 0) sprintf(full_file_path, "%s_%d", full_file_path, prefix);
     FILE *fp = fopen(full_file_path, "w");
     fprintf(fp, "%.2f", value);
+    DEBUG_INFO("%s : %.2f\n", filename, value);
     fclose(fp);
 }
 void write_data_ui(char *dir, char *filename, unsigned int value, int prefix) {
@@ -40,6 +42,7 @@ void write_data_ui(char *dir, char *filename, unsigned int value, int prefix) {
     if(prefix >= 0) sprintf(full_file_path, "%s_%d", full_file_path, prefix);
     FILE *fp = fopen(full_file_path, "w");
     fprintf(fp, "%u", value);
+    DEBUG_INFO("%s : %u\n", filename, value);
     fclose(fp);
 }
 void write_data_s(char *dir, char *filename, char* value, int prefix) {
@@ -48,6 +51,7 @@ void write_data_s(char *dir, char *filename, char* value, int prefix) {
     if(prefix >= 0) sprintf(full_file_path, "%s_%d", full_file_path, prefix);
     FILE *fp = fopen(full_file_path, "w");
     fprintf(fp, "%s", value);
+    DEBUG_INFO("%s : %s\n", filename, value);
     fclose(fp);
 }
 void write_data_ull(char *dir, char *filename, unsigned long long value, int prefix) {
@@ -56,6 +60,7 @@ void write_data_ull(char *dir, char *filename, unsigned long long value, int pre
     if(prefix >= 0) sprintf(full_file_path, "%s_%d", full_file_path, prefix);
     FILE *fp = fopen(full_file_path, "w");
     fprintf(fp, "%llu", value);
+    DEBUG_INFO("%s : %llu\n", filename, value);
     fclose(fp);
 }
 
@@ -106,10 +111,10 @@ void* get_data_from_client(void *ip) {
        free(data);
        goto socket;
     }
+
     write_data_f(data_dir, "cpu_util", data->cpu_util, -1);
     write_data_ui(data_dir, "gpu_count", data->gpu_count, -1);
-    for (gpu_index = 0; gpu_index < data->gpu_count; gpu_index) {
-      char filename_index[FILENAME_LEN];
+    for (gpu_index = 0; gpu_index < data->gpu_count; gpu_index++) {
       write_data_s  (data_dir, "gpu_name",        data->gpu_name[gpu_index],        gpu_index);
       write_data_ui (data_dir, "gpu_cores_util",  data->gpu_cores_util[gpu_index],  gpu_index);
       write_data_ui (data_dir, "gpu_mem_util",    data->gpu_mem_util[gpu_index],    gpu_index);
@@ -117,7 +122,6 @@ void* get_data_from_client(void *ip) {
       write_data_ull(data_dir, "gpu_mem_used",    data->gpu_mem_used[gpu_index],    gpu_index);
       write_data_ui (data_dir, "gpu_temperature", data->gpu_temperature[gpu_index], gpu_index);
     }
-
     free(data);
   }
 }

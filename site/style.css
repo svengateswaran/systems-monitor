@@ -5,6 +5,7 @@
 body {
   font-family: EncodeSans;
   margin:0px;
+  
 }
 
 #systems-container {
@@ -21,10 +22,11 @@ body {
   border-radius:10px;
 }
 .sys-header {
+ /* background:#5DADEC;*/
+  background: #2243B6;
+  font-size :18px;
   padding:10px;
   text-align:center;
-  background:#63B76C;
-  font-weight: bold;
   border-radius:10px 10px 0px 0px;
   color :#fff;
 }
@@ -40,16 +42,35 @@ th, td {
   width:50%;
 }
 #header {
-  background:#5DADEC;
+  background: #2243B6;
   text-align:center;
-  padding:12px;
   color:#fff;
-  font-size:20px;
+  font-size:25px;
+  position:fixed;
+  display:block;
+  width:100%;
+  height:65px;
+  box-shadow:5px 0px 15px #000;
+}
+
+#header-content {
+  text-align:center;
+  color:#fff;
+  font-size:25px;
+  padding:15px;
+  display:inline-block;
 }
 .files-details {
-  font-size:15px;
 }
 
 .progress-bar {
-  background:#f00;
+  background:#FF5050;
 }
+.space-filler {
+  height:70px;
+  width:100%;
+}
+
+td {
+}
+

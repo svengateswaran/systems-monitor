@@ -36,12 +36,12 @@ $data_col = array(
                   array("GPU Count", "gpu_count", "")
                  );
 $data_gpu_col = array( 
-                      array("GPU Name", "gpu_name", ""),
-                      array("GPU Cores Util", "gpu_cores_util", "%"),
-                      array("GPU Memory Util", "gpu_mem_util", "%"),
-                      array("GPU Total Memory", "gpu_mem_total", "GB"),
-                      array("GPU Used Memory", "gpu_mem_used", "GB"),
-                      array("GPU Temperature", "gpu_temperature", "C")
+                      array("Name", "gpu_name", ""),
+                      array("Cores Util", "gpu_cores_util", "%"),
+                      array("Memory Util", "gpu_mem_util", "%"),
+                      array("Total Memory", "gpu_mem_total", "GB"),
+                      array("Used Memory", "gpu_mem_used", "GB"),
+                      array("Temperature", "gpu_temperature", "C")
                       ); 
 $data_dir = "/home/mcw/cls-mng/systems-monitor/site/data";
 $dir_itr = new DirectoryIterator($data_dir);
@@ -66,7 +66,7 @@ foreach ($dir_itr as $fileinfo) {
                echo "<tr style='background:#ccc;'>";
                for($gdi = 0; $gdi < count($data_gpu_col); $gdi++){
                  $data_file = $sys_dir . "/" . $data_gpu_col[$gdi][1] . "_" . $gi;
-                 print_data("G$gi - " . $data_gpu_col[$gdi][0], $data_file, $data_gpu_col[$gdi][2], $gpu_util);
+                 print_data("GPU $gi - " . $data_gpu_col[$gdi][0], $data_file, $data_gpu_col[$gdi][2], $gpu_util);
                }
                echo "</tr>";
              }

@@ -39,7 +39,6 @@ th, td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  width:50%;
 }
 #header {
   background: #2243B6;
@@ -68,10 +67,13 @@ th, td {
   background:#FF5050;
 }
 .space-filler {
-  height:70px;
+  height:90px;
   width:100%;
 }
 
-td {
+th, td {
+  text-align:center;
 }
-
+tr:hover {
+background:#c00;
+}

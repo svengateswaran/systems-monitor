@@ -3,7 +3,7 @@
 <title>Systems Monitor</title>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="images/systems-monitor-logo-32x32.png" type="image/png" sizes="32x32">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="jquery.min.js"></script>
 <script>
 function get_data() {
    $.ajax({url: "get_data.php", success: function(result){
@@ -11,8 +11,8 @@ function get_data() {
    }});
 }
 $(document).ready(function(){
-   setInterval(get_data, 500);
-   // get_data();
+   //setInterval(get_data, 500);
+    get_data();
 });
 </script>
 </head>

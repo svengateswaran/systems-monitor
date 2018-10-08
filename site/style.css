@@ -10,21 +10,22 @@ body {
 
 #systems-container {
   width:100%;
+}
+#systems-data {
   text-align:center;
 }
-
 .sys-block {
   width:400px;
   border:solid #ccc 1px;
   display :inline-block;
-  margin:20px;
+  margin:15px;
   box-shadow:0px 0px 8px #888888;
   border-radius:10px;
 }
 .sys-header {
- /* background:#5DADEC;*/
-  background: #2243B6;
-  font-size :18px;
+  background:#182f81;
+  /*background: #333;*/
+  font-size :16px;
   padding:10px;
   text-align:center;
   border-radius:10px 10px 0px 0px;
@@ -38,11 +39,10 @@ body {
 th, td {
   padding: 8px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #000;
 }
 #header {
   background: #2243B6;
-  text-align:center;
   color:#fff;
   font-size:25px;
   position:fixed;
@@ -51,29 +51,87 @@ th, td {
   height:65px;
   box-shadow:5px 0px 15px #000;
 }
-
 #header-content {
-  text-align:center;
+  position:inherit;
   color:#fff;
   font-size:25px;
-  padding:15px;
+  padding:15px 15px 15px 5px;
   display:inline-block;
   letter-spacing: 2px;
 }
-.files-details {
-}
-
 .progress-bar {
   background:#FF5050;
 }
 .space-filler {
-  height:90px;
+  height:65px;
   width:100%;
 }
-
+.dash-space-filler {
+  height:165px;
+  width:100%;
+}
 th, td {
   text-align:center;
+  font-weight:normal;
 }
-tr:hover {
-background:#c00;
+#logo {
+  width:40px;
+  height:40px;
+  margin:10px 10px 10px 20px;
+}
+.sys-name {
+  font-size:16px;
+  background:#333;
+  color:#fff;
+  border-bottom: 1px solid #fff;
+}
+thead {
+  background:#333;
+  color:#fff;
+  font-weight:bold;
+}
+th {
+  height:50px;
+  font-weight:bold;
+  border-bottom: 1px solid #fff;
+}
+td {
+  font-size:15px;
+}
+.system-row {
+  height:44.4px;
+  width:100%;
+}
+#dashboard {
+  top:65px;
+  position:fixed;
+  width : 100%;
+  height : 100px;
+  padding : 10px;
+  background: #fff;
+  box-shadow: 5px 5px 15px #ccc;
+  color: #fff;
+  text-align:center;
+}
+#dashboard table{
+  color:#000;
+  width:50%;
+  border-collapse: collapse;
+  display:inline-table;
+  margin:15px;
+}
+.dashboard-td {
+  width:50%;
+}
+#options {
+  float:right;
+  font-size:18px;
+  padding:20px 25px 20px 20px;
+  display:inline-block;
+  text-decoration:underline;
+  cursor:pointer;
+}
+#dashboard td {
+  width:50%;
+  border: 1px solid #000;
 }

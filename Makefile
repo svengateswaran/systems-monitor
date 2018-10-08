@@ -23,7 +23,7 @@ server:
 	$(CXX) $(SRC)/server/*.c -lpthread -I$(INCLUDES) -o $(BUILD)/$(SERVER_EXE)
 
 client:
-	$(CXX) $(SRC)/client/*.c -I$(INCLUDES) $(NV_FLAGS) -o $(BUILD)/$(CLIENT_EXE)
+	$(CXX) $(SRC)/client/*.c -I$(INCLUDES) $(NV_FLAGS) -lm -o $(BUILD)/$(CLIENT_EXE)
 
 run-server:
 	$(BUILD)/$(SERVER_EXE)

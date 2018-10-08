@@ -3,4 +3,6 @@
 
 float GetCPULoad();
 
+void GetDiskUsage(float *free_space, float *capacity);
+
 #endif /* __LINUXSTATS_H__ */

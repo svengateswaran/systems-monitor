@@ -33,7 +33,8 @@ function print_data($title, $data_file, $suffix, $util) {
 
 $data_col = array(
                   array("CPU", "cpu_util", "%"),
-                  array("GPU Count", "gpu_count", "")
+                  array("GPU Count", "gpu_count", ""),
+                  array("Disk", "disk_util", "%")
                  );
 $data_gpu_col = array( 
                       array("", "gpu_cores_util", "%"),
@@ -88,7 +89,7 @@ foreach ($dir_itr as $fileinfo) {
 echo "<div id='dashboard'>";
 echo "<table>";
 $total_gpu_util_percent = (int)(((float)$used_gpu_count / $total_gpu_count ) * 100);
-echo "<tr><td rowspan=2> Total Number of GPUs Usage Status </td> <td> <div class='progress-bar' style='width:$total_gpu_util_percent%'> $total_gpu_util_percent%</div></td></tr>";
+echo "<tr><td rowspan=2> GPUs Usage Status (#GPUs) </td> <td> <div class='progress-bar' style='width:$total_gpu_util_percent%'> $total_gpu_util_percent%</div></td></tr>";
 echo "<tr><td> $used_gpu_count / $total_gpu_count </td></tr>";
 echo "</table>";
 echo "</div>";

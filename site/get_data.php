@@ -32,6 +32,9 @@ function print_data($title, $data_file, $suffix, $util, $rowspan) {
 
 $data_col = array(
                   array("CPU Load", "cpu_util", "%"),
+                  array("Disk Utilization", "disk_util", "%"),
+                  array("Disk Free Space", "disk_freespace", "GB"),
+                  array("Disk Capacity", "disk_capacity", "GB"),
                   array("GPU Count", "gpu_count", "")
                  );
 $data_gpu_col = array( 

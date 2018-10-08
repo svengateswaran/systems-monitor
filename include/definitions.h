@@ -3,7 +3,7 @@
 
 #define DEBUG 0
 
-#define PORT 7000
+#define PORT 7007
 
 #ifndef PROCDIR
 #define PROCDIR "/proc"
@@ -39,6 +39,8 @@
 
 typedef struct {
   float cpu_util;
+  float disk_capacity;
+  float disk_freespace;
 
   /* GPU Info */
   unsigned int gpu_count;

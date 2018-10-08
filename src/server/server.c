@@ -113,6 +113,9 @@ void* get_data_from_client(void *ip) {
     }
     DEBUG_INFO("-----%s--------\n", client_ip);
     write_data_f(data_dir, "cpu_util", data->cpu_util, -1);
+    write_data_f(data_dir, "disk_capacity", data->disk_capacity, -1);
+    write_data_f(data_dir, "disk_freespace", data->disk_freespace, -1);
+    write_data_f(data_dir, "disk_util", (data->disk_capacity - data->disk_freespace) * 100 / data->disk_capacity, -1);
     write_data_ui(data_dir, "gpu_count", data->gpu_count, -1);
     for (gpu_index = 0; data->gpu_count > 0 &&
                         data->gpu_count <= MAX_NUM_GPU &&

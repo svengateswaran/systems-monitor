@@ -18,7 +18,7 @@ body {
   width:400px;
   border:solid #ccc 1px;
   display :inline-block;
-  margin:15px;
+  margin:10px;
   box-shadow:0px 0px 8px #888888;
   border-radius:10px;
 }
@@ -67,7 +67,7 @@ th, td {
   width:100%;
 }
 .dash-space-filler {
-  height:165px;
+  height:150px;
   width:100%;
 }
 th, td {
@@ -122,6 +122,9 @@ td {
 }
 .dashboard-td {
   width:50%;
+}
+.dashboard-table tr:last-child td{
+  border:none;
 }
 #options {
   float:right;

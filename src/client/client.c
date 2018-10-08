@@ -68,9 +68,14 @@ int main() {
       exit(EXIT_FAILURE);
   }
   DEBUG_INFO("connected to server\n");
+
+ 
   while(1) {
     sys_data *data = (sys_data*) malloc(sizeof(sys_data));
     data->cpu_util = GetCPULoad();
+
+    GetDiskUsage(&data->disk_freespace, &data->disk_capacity);
+ 
     if(nvml_dl) {
       data->gpu_count = get_gpu_count();
  

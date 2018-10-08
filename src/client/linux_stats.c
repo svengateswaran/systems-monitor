@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <definitions.h>
 #include <unistd.h>
+#include <sys/statvfs.h>
 
 typedef struct {
   unsigned long long int total;
@@ -58,4 +59,16 @@ float GetCPULoad() {
     cpu_percent  = 0;
 
   return cpu_percent;  
+}
+
+int GetDiskUsage(float *free_space, float *capacity) {
+  struct statvfs buf;
+  int status = statvfs("/", &buf);
+  if(status) {
+    DEBUG_INFO("Unable to retrieve disk space details\n");
+  }
+  *capacity = ((unsigned long)buf.f_blocks * buf.f_bsize)/ (1024*1024*1024.0);
+  *free_space = ((unsigned long)buf.f_bfree * buf.f_bsize)/ (1024*1024*1024.0) -  (*capacity * 0.05);
+  DEBUG_INFO("Disk Capacity   : %.2fGB\n", *capacity);
+  DEBUG_INFO("Disk Free Space : %.2fGB\n", *free_space);
 }

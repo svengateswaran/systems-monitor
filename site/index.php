@@ -19,7 +19,7 @@ function get_data() {
 }
 $(document).ready(function(){
    setInterval(get_data, 500);
-    get_data();
+   get_data();
 });
 
 </script>

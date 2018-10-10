@@ -1,7 +1,7 @@
 # Simple Remote Systems Monitoring Tool
 
 ## Supported OS:
-* Linux (Tested on Ubuntu)
+* Linux (Tested on Ubuntu/CentOS)
 
 ## Usage:
 
@@ -35,5 +35,10 @@ Add clients(ipv4 address) to config/clients.txt
 3. Launch the Dashboard - http://server_ip_address/systems-monitor
 
 ### Supported Features
-* Realtime CPU Load %
-
+* CPU Load %
+* Disk Usage
+* Multiple GPU Status
+  - Cores Utilization
+  - Memory Utilization (R/W)
+  - DRAM Usage
+  - Temperature

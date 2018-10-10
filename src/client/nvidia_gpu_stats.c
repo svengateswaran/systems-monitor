@@ -163,7 +163,7 @@ int get_gpu_stat(int index, void *dl, char *device_name, unsigned int *gpu_util,
    *mem_total   = getMemoryInfo(device, 0, dl);
    *mem_used    = getMemoryInfo(device, 2, dl);
    *temperature = getTemperature(device, dl);
-   DEBUG_INFO("%d. %s - p:%d%% m:%d%% t:%d mt:%d mf:%d mu:%d\n",
+   DEBUG_INFO("%d. %s - p:%llu%% m:%llu%% t:%llu mt:%llu mf:%llu mu:%llu\n",
               index, name, getUtilization(device, 0, dl), getUtilization(device, 1, dl), getTemperature(device, dl),
               getMemoryInfo(device, 0, dl)/(1024*1024), getMemoryInfo(device, 1, dl)/(1024*1024) ,
               getMemoryInfo(device, 2, dl)/(1024*1024));

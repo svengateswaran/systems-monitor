@@ -119,6 +119,7 @@ td {
   border-collapse: collapse;
   display:inline-table;
   margin:15px;
+  font-size:25px;
 }
 .dashboard-td {
   width:50%;

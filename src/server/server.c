@@ -168,7 +168,9 @@ int main() {
   FILE *client_fp = fopen(CLIENTS_LIST, "r");
   int client_i = 0;
   while (!feof(client_fp)) {
-    fscanf(client_fp, "%s", clients_list + (client_i * CLIENT_LEN));
+    int read = fscanf(client_fp, "%s", clients_list + (client_i * CLIENT_LEN));
+    if(read == 0)
+      DEBUG_INFO("Unable to read data from config file\n");
     client_i++;
   }
   fclose(client_fp);

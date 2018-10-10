@@ -1,8 +1,6 @@
 #ifndef __DEFINITIONS_H__
 #define __DEFINITIONS_H__
 
-#define DEBUG 0
-
 #define PORT 7007
 
 #ifndef PROCDIR
